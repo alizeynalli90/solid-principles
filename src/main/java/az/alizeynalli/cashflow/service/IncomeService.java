@@ -10,20 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CashFlowService {
+public class IncomeService {
 
     @Autowired
     IncomeRepository incomeRepository;
-
-    @Autowired
-    ExpenseRepository expenseRepository;
-
 
     public List<Income> getIncomes() {
         return incomeRepository.findAll();
     }
 
-    public List<Expense> getExpenses() {
-        return expenseRepository.findAll();
-    }
 }
