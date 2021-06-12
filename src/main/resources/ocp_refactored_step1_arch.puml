@@ -1,0 +1,72 @@
+@startuml
+interface IncomeRepository{
+}
+
+interface ExpenseRepository{
+}
+
+class IncomeController {
+    - IncomeService service;
+    + List<Income> getIncomes();
+    + Income getIncome(Long id);
+    + Income createIncome(Income income);
+    + Income saveIncome(Income income);
+    + void deleteIncome(Long id);
+}
+
+class ExpenseController {
+    - ExpenseService service;
+    + List<Expense> getExpenses();
+    + Expense getExpense(Long id);
+    + Expense createExpense(Expense expense);
+    + Expense saveExpense(Expense expense);
+    + void deleteExpense(Long id);
+}
+
+component cashflow.core.* {
+class IncomeServiceImpl {
+    - IncomeRepository repository;
+    + List<Income> getIncomes();
+    + Income getIncome(Long id);
+    + Income createIncome(Income income);
+    + Income saveIncome(Income income);
+    + void deleteIncome(Long id);
+}
+
+class ExpenseServiceImpl {
+    - ExpenseRepository repository;
+    + List<Expense> getExpenses();
+    + Expense getExpense(Long id);
+    + Expense createExpense(Expense expense);
+    + Expense saveExpense(Expense expense);
+    + void deleteExpense(Long id);
+}
+
+interface IncomeService{
+    {abstract} List<Income> getIncomes();
+    {abstract} Income getIncome(Long id);
+    {abstract} Income createIncome(Income income);
+    {abstract} Income saveIncome(Income income);
+    {abstract} void deleteIncome(Long id);
+}
+
+interface ExpenseService{
+    {abstract} List<Expense> getExpenses();
+    {abstract} Expense getExpense(Long id);
+    {abstract} Expense createExpense(Expense expense);
+    {abstract} Expense saveExpense(Expense expense);
+    {abstract} void deleteExpense(Long id);
+}
+}
+
+IncomeController --> IncomeService
+ExpenseController --> ExpenseService
+class IncomeServiceImpl implements IncomeService
+class ExpenseServiceImpl implements ExpenseService
+IncomeServiceImpl --> IncomeRepository
+ExpenseServiceImpl --> ExpenseRepository
+@enduml
+
+
+
+

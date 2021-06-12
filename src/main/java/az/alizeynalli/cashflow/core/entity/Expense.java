@@ -1,22 +1,25 @@
-package az.alizeynalli.cashflow.entity;
+package az.alizeynalli.cashflow.core.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Date;
 
 @Entity
-@Table(name = "income")
-public class Income {
+@Table(name = "expense")
+public class Expense {
 
     private long id;
     private String description;
+    private Date dueDate;
     private BigDecimal amount;
 
-    public Income() {
+    public Expense() {
     }
 
-    public Income(long id, String description, BigDecimal amount) {
+    public Expense(long id, String description,Date dueDate, BigDecimal amount) {
         this.id = id;
         this.description = description;
+        this.dueDate = dueDate;
         this.amount = amount;
     }
 
@@ -39,11 +42,20 @@ public class Income {
         this.description = description;
     }
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "due_date", nullable = false)
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
 
+    @Column(name = "amount", nullable = false)
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }

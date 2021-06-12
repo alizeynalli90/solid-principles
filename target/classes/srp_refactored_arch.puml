@@ -16,12 +16,12 @@ class ExpenseController {
 }
 
 class IncomeService {
-    - IncomeRepository income;
+    - IncomeRepository repository;
     + List<Income> getIncomes();
 }
 
 class ExpenseService {
-    - ExpenseRepository Expense;
+    - ExpenseRepository repository;
     + List<Expense> getExpenses();
 }
 
