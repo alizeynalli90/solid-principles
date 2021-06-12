@@ -1,11 +1,10 @@
 package az.alizeynalli.cashflow.controller;
 
-import az.alizeynalli.cashflow.entity.Expense;
-import az.alizeynalli.cashflow.service.ExpenseService;
+import az.alizeynalli.cashflow.core.entity.Expense;
+import az.alizeynalli.cashflow.core.service.ExpenseService;
+import az.alizeynalli.cashflow.core.service.impl.ExpenseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,4 +17,24 @@ public class ExpenseController {
 
     @GetMapping("/expenses")
     public List<Expense> getExpenses() { return service.getExpenses(); }
+
+    @GetMapping("/expense/{id}")
+    public Expense getExpense(@PathVariable("id") Long id) {
+        return service.getExpense(id);
+    }
+
+    @DeleteMapping("/expense/{id}")
+    public void deleteExpense(@PathVariable("id") Long id) {
+        service.deleteExpense(id);
+    }
+
+    @PostMapping("/expense")
+    public Expense createExpense(@RequestBody Expense expense) {
+        return service.createExpense(expense);
+    }
+
+    @PutMapping("/expense")
+    public Expense saveExpense(@RequestBody Expense expense) {
+        return service.saveExpense(expense);
+    }
 }
