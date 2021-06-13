@@ -1,9 +1,11 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
 import az.alizeynalli.cashflow.core.entity.Expense;
+import az.alizeynalli.cashflow.core.service.CalculatorService;
 import az.alizeynalli.cashflow.core.service.ExpenseService;
 import az.alizeynalli.cashflow.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,10 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Autowired
     ExpenseRepository repository;
+
+    @Autowired
+    @Qualifier(value="expense")
+    CalculatorService calculator;
 
     @Override
     public List<Expense> getExpenses() {
@@ -37,5 +43,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public Expense saveExpense(Expense expense) {
         return repository.save(expense);
+    }
+
+    @Override
+    public Integer getTotalExpenses() {
+        return calculator.calculateTotal();
     }
 }

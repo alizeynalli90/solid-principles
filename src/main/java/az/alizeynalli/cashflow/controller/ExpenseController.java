@@ -6,6 +6,7 @@ import az.alizeynalli.cashflow.core.service.impl.ExpenseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -36,5 +37,10 @@ public class ExpenseController {
     @PutMapping("/expense")
     public Expense saveExpense(@RequestBody Expense expense) {
         return service.saveExpense(expense);
+    }
+
+    @GetMapping("/expense/total")
+    public Integer getTotalExpenses(){
+        return service.getTotalExpenses();
     }
 }

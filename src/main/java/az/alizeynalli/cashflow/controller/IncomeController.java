@@ -38,4 +38,9 @@ public class IncomeController {
     public Income saveIncome(@RequestBody Income income) {
         return service.saveIncome(income);
     }
+
+    @GetMapping("/income/total")
+    public Integer getTotalIncomes(){
+        return service.getTotalIncomes();
+    }
 }
