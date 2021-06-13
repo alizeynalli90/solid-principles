@@ -14,4 +14,6 @@ public interface ExpenseService {
     Expense createExpense(Expense expense);
 
     Expense saveExpense(Expense expense);
+
+    Integer getTotalExpenses();
 }
