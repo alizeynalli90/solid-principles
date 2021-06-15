@@ -15,30 +15,30 @@ public class ExpenseController {
     ExpenseService service;
 
     @GetMapping("/expenses")
-    public List<Expense> getExpenses() { return service.getExpenses(); }
+    public List<Expense> getExpenses() { return service.getAll(); }
 
     @GetMapping("/expense/{id}")
     public Expense getExpense(@PathVariable("id") Long id) {
-        return service.getExpense(id);
+        return service.get(id);
     }
 
     @DeleteMapping("/expense/{id}")
     public void deleteExpense(@PathVariable("id") Long id) {
-        service.deleteExpense(id);
+        service.delete(id);
     }
 
     @PostMapping("/expense")
     public Expense createExpense(@RequestBody Expense expense) {
-        return service.createExpense(expense);
+        return service.create(expense);
     }
 
     @PutMapping("/expense")
     public Expense saveExpense(@RequestBody Expense expense) {
-        return service.saveExpense(expense);
+        return service.save(expense);
     }
 
     @GetMapping("/expense/total")
     public Integer getTotalExpenses(){
-        return service.getTotalExpenses();
+        return service.getTotal();
     }
 }

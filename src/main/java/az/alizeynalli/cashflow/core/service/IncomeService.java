@@ -4,17 +4,6 @@ import az.alizeynalli.cashflow.database.entity.Income;
 
 import java.util.List;
 
-public interface IncomeService {
+public interface IncomeService extends RepositoryService<Income>{
 
-    List<Income> getIncomes();
-
-    Income getIncome(Long id);
-
-    void deleteIncome(Long id);
-
-    Income createIncome(Income income);
-
-    Income saveIncome(Income income);
-
-    Integer getTotalIncomes();
 }

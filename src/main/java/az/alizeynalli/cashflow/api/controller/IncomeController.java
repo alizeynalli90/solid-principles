@@ -15,30 +15,30 @@ public class IncomeController {
     IncomeService service;
 
     @GetMapping("/incomes")
-    public List<Income> getIncomes() { return service.getIncomes(); }
+    public List<Income> getIncomes() { return service.getAll(); }
 
     @GetMapping("/income/{id}")
     public Income getIncome(@PathVariable("id") Long id) {
-        return service.getIncome(id);
-    }
-
-    @DeleteMapping("/income/{id}")
-    public void deleteIncome(@PathVariable("id") Long id) {
-        service.deleteIncome(id);
+        return service.get(id);
     }
 
     @PostMapping("/income")
     public Income createIncome(@RequestBody Income income) {
-        return service.createIncome(income);
+        return service.create(income);
     }
 
     @PutMapping("/income")
     public Income saveIncome(@RequestBody Income income) {
-        return service.saveIncome(income);
+        return service.save(income);
+    }
+
+    @DeleteMapping("/income/{id}")
+    public void deleteIncome(@PathVariable("id") Long id) {
+        service.delete(id);
     }
 
     @GetMapping("/income/total")
     public Integer getTotalIncomes(){
-        return service.getTotalIncomes();
+        return service.getTotal();
     }
 }

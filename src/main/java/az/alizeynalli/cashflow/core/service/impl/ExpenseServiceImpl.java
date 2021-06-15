@@ -21,32 +21,33 @@ public class ExpenseServiceImpl implements ExpenseService {
     CalculatorService calculator;
 
     @Override
-    public List<Expense> getExpenses() {
+    public List<Expense> getAll() {
         return repository.findAll();
     }
 
     @Override
-    public Expense getExpense(Long id) {
+    public Expense get(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public void deleteExpense(Long id) {
+    public Expense create(Expense entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public Expense save(Expense entity) {
+        return repository.save(entity);
+    }
+
+    @Override
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 
     @Override
-    public Expense createExpense(Expense expense) {
-        return repository.save(expense);
-    }
-
-    @Override
-    public Expense saveExpense(Expense expense) {
-        return repository.save(expense);
-    }
-
-    @Override
-    public Integer getTotalExpenses() {
+    public Integer getTotal() {
         return calculator.calculateTotal(repository.findAll());
     }
+
 }
