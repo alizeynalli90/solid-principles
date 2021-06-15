@@ -5,7 +5,7 @@ import org.apache.catalina.LifecycleState;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface CalculatorService<T> {
+public interface CalculatorService<T> extends  Service {
     Integer calculateTotal(List<T> list);
 
 }

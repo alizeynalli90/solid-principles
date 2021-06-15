@@ -21,32 +21,32 @@ public class IncomeServiceImpl implements IncomeService {
     CalculatorService calculatorService;
 
     @Override
-    public List<Income> getIncomes() {
+    public List<Income> getAll() {
         return repository.findAll();
     }
 
     @Override
-    public Income getIncome(Long id) {
+    public Income get(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public void deleteIncome(Long id) {
+    public Income create(Income income) {
+        return repository.save(income);
+    }
+
+    @Override
+    public Income save(Income income) {
+        return repository.save(income);
+    }
+
+    @Override
+    public void delete(Long id) {
         repository.deleteById(id);
     }
 
     @Override
-    public Income createIncome(Income income) {
-        return repository.save(income);
-    }
-
-    @Override
-    public Income saveIncome(Income income) {
-        return repository.save(income);
-    }
-
-    @Override
-    public Integer getTotalIncomes() {
+    public Integer getTotal() {
         return calculatorService.calculateTotal(repository.findAll());
     }
 
