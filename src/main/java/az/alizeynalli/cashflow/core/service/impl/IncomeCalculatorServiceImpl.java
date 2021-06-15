@@ -1,7 +1,7 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
-import az.alizeynalli.cashflow.database.entity.Income;
 import az.alizeynalli.cashflow.core.service.CalculatorService;
+import az.alizeynalli.cashflow.database.entity.Income;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

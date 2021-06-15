@@ -1,8 +1,8 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
-import az.alizeynalli.cashflow.database.entity.Income;
 import az.alizeynalli.cashflow.core.service.CalculatorService;
 import az.alizeynalli.cashflow.core.service.IncomeService;
+import az.alizeynalli.cashflow.database.entity.Income;
 import az.alizeynalli.cashflow.database.repository.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

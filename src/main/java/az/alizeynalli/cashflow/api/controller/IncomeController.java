@@ -1,7 +1,7 @@
 package az.alizeynalli.cashflow.api.controller;
 
-import az.alizeynalli.cashflow.database.entity.Income;
 import az.alizeynalli.cashflow.core.service.IncomeService;
+import az.alizeynalli.cashflow.database.entity.Income;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

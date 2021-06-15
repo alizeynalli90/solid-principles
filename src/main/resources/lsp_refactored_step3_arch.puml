@@ -41,7 +41,3 @@ interface ExpenseService extends RepositoryService
 interface RepositoryService extends Service
 interface CalculatorService extends Service
 @enduml
-
-
-
-
