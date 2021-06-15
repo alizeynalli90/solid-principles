@@ -1,7 +1,11 @@
 package az.alizeynalli.cashflow.core.service;
 
-import java.math.BigDecimal;
+import org.apache.catalina.LifecycleState;
 
-public interface CalculatorService {
-    Integer calculateTotal();
+import java.math.BigDecimal;
+import java.util.List;
+
+public interface CalculatorService<T> {
+    Integer calculateTotal(List<T> list);
+
 }

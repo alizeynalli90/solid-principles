@@ -1,12 +1,10 @@
-package az.alizeynalli.cashflow.controller;
+package az.alizeynalli.cashflow.api.controller;
 
-import az.alizeynalli.cashflow.core.entity.Expense;
+import az.alizeynalli.cashflow.database.entity.Expense;
 import az.alizeynalli.cashflow.core.service.ExpenseService;
-import az.alizeynalli.cashflow.core.service.impl.ExpenseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController

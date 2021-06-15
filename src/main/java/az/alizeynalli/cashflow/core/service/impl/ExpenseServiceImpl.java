@@ -1,9 +1,9 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
-import az.alizeynalli.cashflow.core.entity.Expense;
+import az.alizeynalli.cashflow.database.entity.Expense;
 import az.alizeynalli.cashflow.core.service.CalculatorService;
 import az.alizeynalli.cashflow.core.service.ExpenseService;
-import az.alizeynalli.cashflow.repository.ExpenseRepository;
+import az.alizeynalli.cashflow.database.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -47,6 +47,6 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public Integer getTotalExpenses() {
-        return calculator.calculateTotal();
+        return calculator.calculateTotal(repository.findAll());
     }
 }

@@ -1,9 +1,9 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
-import az.alizeynalli.cashflow.core.entity.Income;
+import az.alizeynalli.cashflow.database.entity.Income;
 import az.alizeynalli.cashflow.core.service.CalculatorService;
 import az.alizeynalli.cashflow.core.service.IncomeService;
-import az.alizeynalli.cashflow.repository.IncomeRepository;
+import az.alizeynalli.cashflow.database.repository.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -47,7 +47,7 @@ public class IncomeServiceImpl implements IncomeService {
 
     @Override
     public Integer getTotalIncomes() {
-        return calculatorService.calculateTotal();
+        return calculatorService.calculateTotal(repository.findAll());
     }
 
 }
