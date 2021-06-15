@@ -1,31 +1,32 @@
 @startuml
-interface IncomeRepository{
-}
 
-interface ExpenseRepository{
-}
-
+component cashflow.api.* {
 class IncomeController {
-    - IncomeService service;
-    + List<Income> getIncomes();
-    + Income getIncome(Long id);
-    + Income createIncome(Income income);
-    + Income saveIncome(Income income);
-    + void deleteIncome(Long id);
-    + Integer getTotalIncomes();
-}
+          - IncomeService service;
+          + List<Income> getIncomes();
+          + Income getIncome(Long id);
+          + Income createIncome(Income income);
+          + Income saveIncome(Income income);
+          + void deleteIncome(Long id);
+          + Integer getTotalIncomes();
+      }
 
 class ExpenseController {
-    - ExpenseService service;
-    + List<Expense> getExpenses();
-    + Expense getExpense(Long id);
-    + Expense createExpense(Expense expense);
-    + Expense saveExpense(Expense expense);
-    + void deleteExpense(Long id);
-    + Integer getTotalExpenses();
+  - ExpenseService service;
+  + List<Expense> getExpenses();
+  + Expense getExpense(Long id);
+  + Expense createExpense(Expense expense);
+  + Expense saveExpense(Expense expense);
+  + void deleteExpense(Long id);
+  + Integer getTotalExpenses();
+}
 }
 
 component cashflow.core.* {
+interface CalculatorService<T>{
+    {abstract} Integer calculateTotal(List<T> list);
+}
+
 class IncomeServiceImpl {
     - IncomeRepository repository;
     + List<Income> getIncomes();
@@ -63,34 +64,46 @@ interface ExpenseService{
     {abstract} void deleteExpense(Long id);
     {abstract} Integer getTotalExpenses();
 }
-
-class CalculatorService {
+class IncomeCalculatorServiceImpl<Income> {
     + Integer calculateTotal();
 }
-
-class IncomeCalculatorServiceImpl {
-    - IncomeRepository repository;
+class ExpenseCalculatorServiceImpl<Expense> {
     + Integer calculateTotal();
 }
-
-class ExpenseCalculatorServiceImpl {
-    - ExpenseRepository repository;
-    + Integer calculateTotal();
 }
+
+component cashflow.database.* {
+interface IncomeRepository{
+}
+
+interface ExpenseRepository{
+}
+
+class Income {
+    - long id;
+    - String description;
+    - Date dueDate;
+    - BigDecimal amount;
+}
+class Expense {
+    - long id;
+    - String description;
+    - Date dueDate;
+    - BigDecimal amount;
+}
+
 }
 
 IncomeController --> IncomeService
 ExpenseController --> ExpenseService
-class IncomeServiceImpl implements IncomeService
-class ExpenseServiceImpl implements ExpenseService
-IncomeServiceImpl --> IncomeRepository
-ExpenseServiceImpl --> ExpenseRepository
 IncomeServiceImpl --> CalculatorService
 ExpenseServiceImpl --> CalculatorService
+class IncomeServiceImpl implements IncomeService
+class ExpenseServiceImpl implements ExpenseService
 class IncomeCalculatorServiceImpl implements CalculatorService
 class ExpenseCalculatorServiceImpl implements CalculatorService
-IncomeCalculatorServiceImpl --> IncomeRepository
-ExpenseCalculatorServiceImpl --> ExpenseRepository
+IncomeServiceImpl --> IncomeRepository
+ExpenseServiceImpl --> ExpenseRepository
 @enduml
 
 

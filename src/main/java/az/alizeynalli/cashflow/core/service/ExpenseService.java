@@ -1,6 +1,6 @@
 package az.alizeynalli.cashflow.core.service;
 
-import az.alizeynalli.cashflow.core.entity.Expense;
+import az.alizeynalli.cashflow.database.entity.Expense;
 
 import java.util.List;
 

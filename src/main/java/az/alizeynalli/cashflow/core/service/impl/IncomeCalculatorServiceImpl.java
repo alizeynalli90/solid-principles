@@ -1,21 +1,17 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
+import az.alizeynalli.cashflow.database.entity.Income;
 import az.alizeynalli.cashflow.core.service.CalculatorService;
-import az.alizeynalli.cashflow.repository.IncomeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Component(value="income")
-public class IncomeCalculatorServiceImpl implements CalculatorService {
-
-    @Autowired
-    IncomeRepository repository;
+public class IncomeCalculatorServiceImpl implements CalculatorService<Income> {
 
     @Override
-    public Integer calculateTotal() {
-        int integer = repository.findAll().stream().map(income -> income.getAmount().intValue()).reduce(0, (a,b) -> a+b);
+    public Integer calculateTotal(List<Income> list) {
+        int integer = list.stream().map(income -> income.getAmount().intValue()).reduce(0, (a,b) -> a+b);
         return Integer.valueOf(integer);
     }
 }

@@ -26,11 +26,6 @@ class ExpenseController {
 }
 
 component cashflow.core.* {
-
-interface CalculatorService{
-    {abstract} Integer calculateTotal();
-}
-
 class IncomeServiceImpl {
     - IncomeRepository repository;
     + List<Income> getIncomes();
@@ -68,10 +63,16 @@ interface ExpenseService{
     {abstract} void deleteExpense(Long id);
     {abstract} Integer getTotalExpenses();
 }
+
+class CalculatorService {
+    + Integer calculateTotal();
+}
+
 class IncomeCalculatorServiceImpl {
     - IncomeRepository repository;
     + Integer calculateTotal();
 }
+
 class ExpenseCalculatorServiceImpl {
     - ExpenseRepository repository;
     + Integer calculateTotal();
@@ -80,16 +81,16 @@ class ExpenseCalculatorServiceImpl {
 
 IncomeController --> IncomeService
 ExpenseController --> ExpenseService
-IncomeServiceImpl --> CalculatorService
-ExpenseServiceImpl --> CalculatorService
 class IncomeServiceImpl implements IncomeService
 class ExpenseServiceImpl implements ExpenseService
+IncomeServiceImpl --> IncomeRepository
+ExpenseServiceImpl --> ExpenseRepository
+IncomeServiceImpl --> CalculatorService
+ExpenseServiceImpl --> CalculatorService
 class IncomeCalculatorServiceImpl implements CalculatorService
 class ExpenseCalculatorServiceImpl implements CalculatorService
 IncomeCalculatorServiceImpl --> IncomeRepository
 ExpenseCalculatorServiceImpl --> ExpenseRepository
-IncomeServiceImpl --> IncomeRepository
-ExpenseServiceImpl --> ExpenseRepository
 @enduml
 
 
