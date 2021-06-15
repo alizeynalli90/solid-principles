@@ -30,6 +30,3 @@ ExpenseController --> ExpenseService
 IncomeService --> IncomeRepository
 ExpenseService --> ExpenseRepository
 @enduml
-
-
-

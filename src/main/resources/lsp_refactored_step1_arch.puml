@@ -105,7 +105,3 @@ class ExpenseCalculatorServiceImpl implements CalculatorService
 IncomeServiceImpl --> IncomeRepository
 ExpenseServiceImpl --> ExpenseRepository
 @enduml
-
-
-
-
