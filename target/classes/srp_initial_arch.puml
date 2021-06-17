@@ -23,6 +23,3 @@ CashFlowController --> CashFlowService
 CashFlowService --> IncomeRepository
 CashFlowService --> ExpenseRepository
 @enduml
-
-
-

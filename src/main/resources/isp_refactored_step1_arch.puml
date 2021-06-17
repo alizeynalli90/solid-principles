@@ -5,6 +5,17 @@ interface CalculatorService<T>{
     {abstract} Integer calculateTotal(List<T> list);
 }
 
+interface ConverterService {
+}
+
+interface IncomeConverterService {
+    {abstract} Income convertIncome(Income income);
+}
+
+Interface ExpenseConverterService {
+    {abstract} Expense convertExpense(Expense expense);
+}
+
 interface IncomeService<Income>{
     {abstract} List<Income> getAll();
     {abstract} Income get(Long id);
@@ -40,4 +51,7 @@ interface IncomeService extends RepositoryService
 interface ExpenseService extends RepositoryService
 interface RepositoryService extends Service
 interface CalculatorService extends Service
+interface ConverterService extends Service
+interface IncomeConverterService extends ConverterService
+interface ExpenseConverterService extends ConverterService
 @enduml
