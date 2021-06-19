@@ -1,6 +1,8 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
 import az.alizeynalli.cashflow.core.service.CalculatorService;
+import az.alizeynalli.cashflow.core.service.ExpenseConverterService;
+import az.alizeynalli.cashflow.core.service.IncomeConverterService;
 import az.alizeynalli.cashflow.core.service.IncomeService;
 import az.alizeynalli.cashflow.database.entity.Income;
 import az.alizeynalli.cashflow.database.repository.IncomeRepository;
@@ -19,6 +21,9 @@ public class IncomeServiceImpl implements IncomeService {
     @Autowired
     @Qualifier(value="income")
     CalculatorService calculatorService;
+
+    @Autowired
+    IncomeConverterService converterService;
 
     @Override
     public List<Income> getAll() {
@@ -50,4 +55,7 @@ public class IncomeServiceImpl implements IncomeService {
         return calculatorService.calculateTotal(repository.findAll());
     }
 
+    public Income convertIncome(Income income){
+        return converterService.convertIncome(income);
+    }
 }

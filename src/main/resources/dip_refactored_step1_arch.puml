@@ -1,0 +1,157 @@
+@startuml
+
+component cashflow.api.* {
+class IncomeController {
+  - IncomeService service;
+  + List<Income> getAll();
+  + Income get(Long id);
+  + Income create(Income income);
+  + Income save(Income income);
+  + void delete(Long id);
+  + Integer getTotal();
+}
+
+class ExpenseController {
+  - ExpenseService service;
+  + List<Expense> getAll();
+  + Expense get(Long id);
+  + Expense create(Expense expense);
+  + Expense save(Expense expense);
+  + void delete(Long id);
+  + Integer getTotal();
+}
+}
+
+component cashflow.core.* {
+interface CalculatorService<T>{
+    {abstract} Integer calculateTotal(List<T> list);
+}
+
+interface ConverterService {
+}
+
+interface IncomeConverterService {
+    {abstract} Income convertIncome(Income income);
+}
+
+interface ExpenseConverterService {
+    {abstract} Expense convertExpense(Expense expense);
+}
+
+class IncomeConverterServiceImpl {
+    + Income convertIncome(Income income);
+}
+
+class ExpenseConverterServiceImpl {
+    + Expense convertExpense(Expense expense);
+}
+
+class IncomeServiceImpl {
+    - IncomeRepository repository;
+    - CalculatorService calculatorService;
+    - IncomeConverterService converterService;
+    + List<Income> getAll();
+    + Income get(Long id);
+    + Income create(Income income);
+    + Income save(Income income);
+    + void delete(Long id);
+    + Integer getTotal();
+    + Income convert(Income income);
+}
+
+class ExpenseServiceImpl {
+    - ExpenseRepository repository;
+    - CalculatorService calculatorService;
+    - ExpenseConverterService converterService;
+    + List<Expense> getAll();
+    + Expense get(Long id);
+    + Expense create(Expense expense);
+    + Expense save(Expense expense);
+    + void delete(Long id);
+    + Integer getTotal();
+    + Expense convert(Expense expense);
+}
+
+interface IncomeService<Income>{
+    {abstract} List<Income> getAll();
+    {abstract} Income get(Long id);
+    {abstract} Income create(Income income);
+    {abstract} Income save(Income income);
+    {abstract} void delete(Long id);
+    {abstract} Integer getTotal();
+}
+
+interface ExpenseService<Expense>{
+    {abstract} List<Expense> getAll();
+    {abstract} Expense get(Long id);
+    {abstract} Expense create(Expense expense);
+    {abstract} Expense save(Expense expense);
+    {abstract} void delete(Long id);
+    {abstract} Integer getTotal();
+}
+
+class IncomeCalculatorServiceImpl<Income> {
+    + Integer calculateTotal();
+}
+
+class ExpenseCalculatorServiceImpl<Expense> {
+    + Integer calculateTotal();
+}
+
+interface Service {
+}
+
+interface RepositoryService<T> {
+    List<T> getAll();
+    T get(Long id);
+    T create(T entity);
+    T save(T entity);
+    void delete(Long id);
+    Integer getTotal();
+}
+}
+
+component cashflow.database.* {
+interface IncomeRepository{
+}
+
+interface ExpenseRepository{
+}
+
+class Income {
+    - long id;
+    - String description;
+    - Date dueDate;
+    - BigDecimal amount;
+}
+class Expense {
+    - long id;
+    - String description;
+    - Date dueDate;
+    - BigDecimal amount;
+}
+
+}
+
+class IncomeServiceImpl implements IncomeService
+class ExpenseServiceImpl implements ExpenseService
+class IncomeCalculatorServiceImpl implements CalculatorService
+class ExpenseCalculatorServiceImpl implements CalculatorService
+interface IncomeService extends RepositoryService
+interface ExpenseService extends RepositoryService
+interface RepositoryService extends Service
+interface CalculatorService extends Service
+interface ConverterService extends Service
+interface IncomeConverterService extends ConverterService
+interface ExpenseConverterService extends ConverterService
+IncomeController --> IncomeService
+ExpenseController --> ExpenseService
+IncomeServiceImpl --> CalculatorService
+ExpenseServiceImpl --> CalculatorService
+IncomeServiceImpl --> IncomeRepository
+ExpenseServiceImpl --> ExpenseRepository
+class IncomeConverterServiceImpl implements IncomeConverterService
+class ExpenseConverterServiceImpl implements ExpenseConverterService
+IncomeServiceImpl --> IncomeConverterService
+ExpenseServiceImpl --> ExpenseConverterService
+@enduml
