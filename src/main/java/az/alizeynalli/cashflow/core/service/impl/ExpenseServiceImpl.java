@@ -1,8 +1,11 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
 import az.alizeynalli.cashflow.core.service.CalculatorService;
+import az.alizeynalli.cashflow.core.service.ExpenseConverterService;
 import az.alizeynalli.cashflow.core.service.ExpenseService;
+import az.alizeynalli.cashflow.core.service.IncomeConverterService;
 import az.alizeynalli.cashflow.database.entity.Expense;
+import az.alizeynalli.cashflow.database.entity.Income;
 import az.alizeynalli.cashflow.database.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +22,9 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Autowired
     @Qualifier(value="expense")
     CalculatorService calculator;
+
+    @Autowired
+    ExpenseConverterService converterService;
 
     @Override
     public List<Expense> getAll() {
@@ -48,6 +54,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public Integer getTotal() {
         return calculator.calculateTotal(repository.findAll());
+    }
+
+    public Expense convertIncome(Expense expense){
+        return converterService.convertExpense(expense);
     }
 
 }
