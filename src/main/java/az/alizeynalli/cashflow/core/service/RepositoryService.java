@@ -12,6 +12,4 @@ public interface RepositoryService<T> extends Service {
     T save(T entity);
 
     void delete(Long id);
-
-    Integer getTotal();
 }

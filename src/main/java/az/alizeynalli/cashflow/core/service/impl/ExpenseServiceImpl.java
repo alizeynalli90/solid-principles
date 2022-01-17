@@ -1,30 +1,18 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
-import az.alizeynalli.cashflow.core.service.CalculatorService;
-import az.alizeynalli.cashflow.core.service.ExpenseConverterService;
-import az.alizeynalli.cashflow.core.service.ExpenseService;
-import az.alizeynalli.cashflow.core.service.IncomeConverterService;
+import az.alizeynalli.cashflow.core.service.ExpenseServicePort;
 import az.alizeynalli.cashflow.database.entity.Expense;
-import az.alizeynalli.cashflow.database.entity.Income;
-import az.alizeynalli.cashflow.database.repository.ExpenseRepository;
+import az.alizeynalli.cashflow.database.repository.ExpenseRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ExpenseServiceImpl implements ExpenseService {
+public class ExpenseServiceImpl implements ExpenseServicePort {
 
     @Autowired
-    ExpenseRepository repository;
-
-    @Autowired
-    @Qualifier(value="expense")
-    CalculatorService calculator;
-
-    @Autowired
-    ExpenseConverterService converterService;
+    ExpenseRepositoryPort repository;
 
     @Override
     public List<Expense> getAll() {
@@ -50,14 +38,4 @@ public class ExpenseServiceImpl implements ExpenseService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
-
-    @Override
-    public Integer getTotal() {
-        return calculator.calculateTotal(repository.findAll());
-    }
-
-    public Expense convertIncome(Expense expense){
-        return converterService.convertExpense(expense);
-    }
-
 }

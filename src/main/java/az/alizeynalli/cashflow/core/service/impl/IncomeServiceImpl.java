@@ -1,29 +1,18 @@
 package az.alizeynalli.cashflow.core.service.impl;
 
-import az.alizeynalli.cashflow.core.service.CalculatorService;
-import az.alizeynalli.cashflow.core.service.ExpenseConverterService;
-import az.alizeynalli.cashflow.core.service.IncomeConverterService;
-import az.alizeynalli.cashflow.core.service.IncomeService;
+import az.alizeynalli.cashflow.core.service.IncomeServicePort;
 import az.alizeynalli.cashflow.database.entity.Income;
-import az.alizeynalli.cashflow.database.repository.IncomeRepository;
+import az.alizeynalli.cashflow.database.repository.IncomeRepositoryPort;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class IncomeServiceImpl implements IncomeService {
+public class IncomeServiceImpl implements IncomeServicePort {
 
     @Autowired
-    IncomeRepository repository;
-
-    @Autowired
-    @Qualifier(value="income")
-    CalculatorService calculatorService;
-
-    @Autowired
-    IncomeConverterService converterService;
+    IncomeRepositoryPort repository;
 
     @Override
     public List<Income> getAll() {
@@ -48,14 +37,5 @@ public class IncomeServiceImpl implements IncomeService {
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
-    }
-
-    @Override
-    public Integer getTotal() {
-        return calculatorService.calculateTotal(repository.findAll());
-    }
-
-    public Income convertIncome(Income income){
-        return converterService.convertIncome(income);
     }
 }

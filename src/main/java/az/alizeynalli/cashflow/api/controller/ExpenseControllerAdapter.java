@@ -1,6 +1,6 @@
 package az.alizeynalli.cashflow.api.controller;
 
-import az.alizeynalli.cashflow.core.service.ExpenseService;
+import az.alizeynalli.cashflow.core.service.ExpenseServicePort;
 import az.alizeynalli.cashflow.database.entity.Expense;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cashflow")
-public class ExpenseController {
+public class ExpenseControllerAdapter {
 
     @Autowired
-    ExpenseService service;
+    ExpenseServicePort service;
 
     @GetMapping("/expenses")
     public List<Expense> getExpenses() { return service.getAll(); }
@@ -35,10 +35,5 @@ public class ExpenseController {
     @PutMapping("/expense")
     public Expense saveExpense(@RequestBody Expense expense) {
         return service.save(expense);
-    }
-
-    @GetMapping("/expense/total")
-    public Integer getTotalExpenses(){
-        return service.getTotal();
     }
 }

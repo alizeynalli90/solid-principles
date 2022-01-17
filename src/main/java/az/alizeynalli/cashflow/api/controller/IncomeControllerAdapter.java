@@ -1,6 +1,6 @@
 package az.alizeynalli.cashflow.api.controller;
 
-import az.alizeynalli.cashflow.core.service.IncomeService;
+import az.alizeynalli.cashflow.core.service.IncomeServicePort;
 import az.alizeynalli.cashflow.database.entity.Income;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cashflow")
-public class IncomeController {
+public class IncomeControllerAdapter {
 
     @Autowired
-    IncomeService service;
+    IncomeServicePort service;
 
     @GetMapping("/incomes")
     public List<Income> getIncomes() { return service.getAll(); }
@@ -35,10 +35,5 @@ public class IncomeController {
     @DeleteMapping("/income/{id}")
     public void deleteIncome(@PathVariable("id") Long id) {
         service.delete(id);
-    }
-
-    @GetMapping("/income/total")
-    public Integer getTotalIncomes(){
-        return service.getTotal();
     }
 }
